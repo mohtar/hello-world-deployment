@@ -4,6 +4,7 @@ kind: Ingress
 metadata:
   name: web-public
   annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web-secure
     traefik.ingress.kubernetes.io/router.middlewares: compressed@file
 spec:
   backend:
