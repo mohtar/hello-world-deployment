@@ -72,39 +72,48 @@ spec:
         - name: traefik
           image: traefik:v2.2
           args:
-            - --log.level=DEBUG
+            # - --log.level=DEBUG
             - --entrypoints.web.address=:80
-            - --entrypoints.web-secure.address=:443
-            - --entrypoints.web-secure.http.tls.certResolver=default
+            # - --entrypoints.web.http.redirections.entryPoint.to=web-secure
+            # - --entrypoints.web.http.redirections.entryPoint.scheme=https
+            # - --entrypoints.web-secure.address=:443
+            # - --entrypoints.web-secure.http.tls.certResolver=default
             - --providers.kubernetesingress
             - --providers.file.directory=/etc/traefik/dynamic
             - --providers.file.watch
-            - --certificatesResolvers.default.acme.email=tarmizi@omnilytics.co
-            - --certificatesResolvers.default.acme.storage=/root/acme.json
-            - --certificatesResolvers.default.acme.httpChallenge.entryPoint=web
+            # - --certificatesResolvers.default.acme.email=tarmiziaffandi@yahoo.com
+            # - --certificatesResolvers.default.acme.storage=/root/acme.json
+            # - --certificatesResolvers.default.acme.httpChallenge.entryPoint=web
           ports:
             - name: web
               containerPort: 80
-            - name: web-secure
-              containerPort: 443
+            # - name: web-secure
+            #   containerPort: 443
           volumeMounts:
             - name: config
               mountPath: /etc/traefik/dynamic
-            - name: data
-              mountPath: /root
+            # - name: data
+            #   mountPath: /root
       volumes:
         - name: config
           configMap:
             name: traefik-config
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 1Gi
+      # nodeSelector:
+      #   dedicated: httpd
+      # tolerations:
+      #   - key: dedicated
+      #     operator: Equal
+      #     value: httpd
+      #     effect: NoSchedule
+  # volumeClaimTemplates:
+  #   - metadata:
+  #       name: data
+  #     spec:
+  #       accessModes:
+  #         - ReadWriteOnce
+  #       resources:
+  #         requests:
+  #           storage: 1Gi
 
 ---
 apiVersion: v1
@@ -132,7 +141,7 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 80
-    - name: web-secure
-      protocol: TCP
-      port: 443
-      targetPort: 443
+    # - name: web-secure
+    #   protocol: TCP
+    #   port: 443
+    #   targetPort: 443
