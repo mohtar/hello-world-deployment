@@ -45,6 +45,7 @@ spec:
           limits:
             cpu: 1000m
             memory: 256Mi
+
 ---
 apiVersion: v1
 kind: Service
@@ -55,3 +56,17 @@ spec:
   - port: 80
   selector:
     app: hello-world
+
+# ---
+# apiVersion: autoscaling/v1
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: hello-world
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: hello-world
+#   minReplicas: 2
+#   maxReplicas: 16
+#   targetCPUUtilizationPercentage: 50
