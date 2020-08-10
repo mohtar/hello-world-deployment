@@ -4,13 +4,16 @@ kind: Ingress
 metadata:
   name: web-public
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web-secure
+    # traefik.ingress.kubernetes.io/router.entrypoints: web-secure
     traefik.ingress.kubernetes.io/router.middlewares: compressed@file
 spec:
-  rules:
-    - host: 188.166.206.110
-      http:
-        paths:
-          - backend:
-              serviceName: hello-world
-              servicePort: 80
+  # rules:
+  #   - host: hello-world.test
+  #     http:
+  #       paths:
+  #         - backend:
+  #             serviceName: hello-world
+  #             servicePort: 80
+  backend:
+    serviceName: hello-world
+    servicePort: 80
