@@ -1,0 +1,11 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: web-public
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: compressed@file
+spec:
+  backend:
+    serviceName: hello-world
+    servicePort: 80
