@@ -1,0 +1,1 @@
+{"jobID":"d2166cfb-6b31-39c2-2c73-2e7ca0a2cd45","spec":{"type":"policy","cause":{"Message":"","User":"Mohd Tarmizi \u003cmohtar@users.noreply.github.com\u003e"},"spec":{"default:deployment/hello-world":{"add":{"automated":"true"},"remove":{}}}},"result":null}
